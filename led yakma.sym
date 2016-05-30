@@ -1,0 +1,49 @@
+004-005 @READ_PROGRAM_MEMORY8.P1
+009-00A @READ_PROGRAM_MEMORY8.P1
+00C     @SCRATCH
+00D     @SCRATCH
+00D     _RETURN_
+00E     @SCRATCH
+00F     @SCRATCH
+011     main.i
+012     main.i
+013     main.i
+014     main.@SCRATCH1
+015     @delay_ms1.P1
+
+ROM Allocation:
+000004  @delay_ms1
+000017  @cinit1
+000017  main
+000017  @cinit2
+
+Project Directory:
+    E:\Projeler\Pic Projeler\ders1_led yakma\
+
+Project Files:
+    led yakma.c                                             [30-May-16 15:42  CRC=72DE0FF3]
+    C:\Program Files (x86)\PICC\Devices\16F84A.h            [21-Haz-13 17:04  CRC=F158D6EC]
+
+Source signature=558FBDCB
+
+Units:
+    led yakma (main)
+
+Compiler Settings:
+    Processor:      PIC16F84A
+    Pointer Size:   8
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    XREF file:   led yakma.xsym
+    Errors:      led yakma.err
+    Ext Symbols: led yakma.esym
+    INHX8:       led yakma.hex
+    Symbols:     led yakma.sym
+    List:        led yakma.lst
+    Debug/COFF:  led yakma.cof
+    Project:     led yakma.ccspjt
+    Call Tree:   led yakma.tre
+    Statistics:  led yakma.STA

@@ -1,0 +1,22 @@
+[PROJECT]
+Target=led yakma.hex
+Processor_Text=PIC16F84A
+CCSVerions=5.007
+Compiler=PCM
+CCSVersion=5.007
+[Target Data]
+FileList=led yakma.c
+[Directories]
+Include=C:\Program Files (x86)\PICC\Devices\;C:\Program Files (x86)\PICC\Drivers\
+[E:\Projeler\Pic Projeler\ders1_led yakma\led yakma]
+Type=4
+[mru-list]
+1=led yakma.c
+[Opened Files]
+1=led yakma.c
+2=
+[led yakma.c]
+Type=4
+[Units]
+Count=1
+1=led yakma (main)

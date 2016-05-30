@@ -1,0 +1,49 @@
+#include <16F84A.h>
+
+#fuses nowdt
+
+#use fast_io(a)
+#use fast_io(b)
+
+#use delay(crystal=4000000)
+
+void main()
+{
+   set_tris_a(0xff);
+   set_tris_b(0x00);
+
+   while(TRUE)
+   {
+      if(input(pin_a0))
+      {
+         output_high(pin_b0);
+         delay_ms(500);
+         output_low(pin_b0);
+         delay_ms(500);
+      }
+      
+      if(input(pin_a1))
+      {
+         output_high(pin_b1);
+         delay_ms(150);
+         output_low(pin_b1);
+         delay_ms(150);
+      }
+      
+      if(input(pin_a2))
+      {
+         output_high(pin_b0);
+         delay_ms(150);
+         output_low(pin_b0);
+         
+         output_high(pin_b1);
+         delay_ms(150);
+         output_low(pin_b1);
+         
+         output_high(pin_b2);
+         delay_ms(150);
+         output_low(pin_b2);
+      }
+   }
+
+}

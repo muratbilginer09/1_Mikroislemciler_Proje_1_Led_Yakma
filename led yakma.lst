@@ -1,0 +1,181 @@
+CCS PCM C Compiler, Version 5.007, 61971               30-May-16 15:47
+
+               Filename:   E:\Projeler\Pic Projeler\ders1_led yakma\led yakma.lst
+
+               ROM used:   101 words (10%)
+                           Largest free fragment is 923
+               RAM used:   5 (7%) at main() level
+                           9 (13%) worst case
+               Stack used: 0 locations
+               Stack size: 8
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   017
+0003:  NOP
+.................... #include <16F84A.h>           //kullanacaðmýz mikrodenetleyici yazýyoruz 
+.................... //////// Standard Header file for the PIC16F84A device //////////////// 
+.................... #device PIC16F84A 
+....................  
+.................... #list 
+....................  
+....................                               // çift slash dan sonra yazacaðýmýz açýklama satýrlarýný program okumaz  
+.................... #fuses nowdt                  //sigorta ayarlarý...ilerki konularda bize lazým olacak 
+....................  
+.................... #use fast_io(a)               // a portunu kullanacaðýmýzý belirttik 
+.................... #use fast_io(b)               // b portunu kullanacaðýmýzý belirtitk 
+....................  
+.................... #use delay(crystal=20000000)  // kullancaðýmýz kristalin 1 saniyede üreteceði kare dalga sayýsý 
+0004:  MOVLW  15
+0005:  MOVWF  04
+0006:  MOVF   00,W
+0007:  BTFSC  03.2
+0008:  GOTO   016
+0009:  MOVLW  06
+000A:  MOVWF  0D
+000B:  CLRF   0C
+000C:  DECFSZ 0C,F
+000D:  GOTO   00C
+000E:  DECFSZ 0D,F
+000F:  GOTO   00B
+0010:  MOVLW  7B
+0011:  MOVWF  0C
+0012:  DECFSZ 0C,F
+0013:  GOTO   012
+0014:  DECFSZ 00,F
+0015:  GOTO   009
+0016:  RETURN
+....................  
+.................... void main()  
+0017:  MOVLW  1F
+0018:  ANDWF  03,F
+.................... { 
+....................    set_tris_a(0xff);          // a portunun tamamý giriþ 
+0019:  MOVLW  FF
+001A:  BSF    03.5
+001B:  MOVWF  05
+....................    set_tris_b(0x00);          // b portunun tamamý çýkýþ 
+001C:  MOVLW  00
+001D:  MOVWF  06
+....................     
+....................    output_b(0x00);            // baþlangýçta b portunu sýfýrlýyoruz 
+001E:  BCF    03.5
+001F:  CLRF   06
+....................  
+....................    while(TRUE)                // programýn iþleneceði sonsuz döngü 
+....................    { 
+....................       if(input(pin_a0))       // A0 pinine sinyal geldiðinde iþlenecek kýsým 
+0020:  BTFSS  05.0
+0021:  GOTO   03A
+....................       { 
+....................          for(int i=1; i<=3; i++) // 3 tekrar 
+0022:  MOVLW  01
+0023:  MOVWF  11
+0024:  MOVF   11,W
+0025:  SUBLW  03
+0026:  BTFSS  03.0
+0027:  GOTO   03A
+....................          { 
+....................          output_high(pin_b0);    // B0 pinine yüksek sinyal yani 5V gönder 
+0028:  BSF    06.0
+....................          delay_ms(500);          // 500 milisaniye bekleme süresi 
+0029:  MOVLW  02
+002A:  MOVWF  14
+002B:  MOVLW  FA
+002C:  MOVWF  15
+002D:  CALL   004
+002E:  DECFSZ 14,F
+002F:  GOTO   02B
+....................          output_low(pin_b0);     // B0 pinine düþük sinyal yani 0V gönder 
+0030:  BCF    06.0
+....................          delay_ms(500); 
+0031:  MOVLW  02
+0032:  MOVWF  14
+0033:  MOVLW  FA
+0034:  MOVWF  15
+0035:  CALL   004
+0036:  DECFSZ 14,F
+0037:  GOTO   033
+0038:  INCF   11,F
+0039:  GOTO   024
+....................          } 
+....................       } 
+....................        
+....................       if(input(pin_a1)) 
+003A:  BTFSS  05.1
+003B:  GOTO   04B
+....................       { 
+....................          for(int i=0; i<3; i++) 
+003C:  CLRF   12
+003D:  MOVF   12,W
+003E:  SUBLW  02
+003F:  BTFSS  03.0
+0040:  GOTO   04B
+....................          { 
+....................          output_high(pin_b1); 
+0041:  BSF    06.1
+....................          delay_ms(150); 
+0042:  MOVLW  96
+0043:  MOVWF  15
+0044:  CALL   004
+....................          output_low(pin_b1); 
+0045:  BCF    06.1
+....................          delay_ms(150); 
+0046:  MOVLW  96
+0047:  MOVWF  15
+0048:  CALL   004
+0049:  INCF   12,F
+004A:  GOTO   03D
+....................          } 
+....................       } 
+....................        
+....................       if(input(pin_a2)) 
+004B:  BTFSS  05.2
+004C:  GOTO   063
+....................       { 
+....................          for(int i=0; i<3; i++) 
+004D:  CLRF   13
+004E:  MOVF   13,W
+004F:  SUBLW  02
+0050:  BTFSS  03.0
+0051:  GOTO   063
+....................          { 
+....................          output_high(pin_b0); 
+0052:  BSF    06.0
+....................          delay_ms(150); 
+0053:  MOVLW  96
+0054:  MOVWF  15
+0055:  CALL   004
+....................          output_low(pin_b0); 
+0056:  BCF    06.0
+....................           
+....................          output_high(pin_b1); 
+0057:  BSF    06.1
+....................          delay_ms(150); 
+0058:  MOVLW  96
+0059:  MOVWF  15
+005A:  CALL   004
+....................          output_low(pin_b1); 
+005B:  BCF    06.1
+....................           
+....................          output_high(pin_b2); 
+005C:  BSF    06.2
+....................          delay_ms(150); 
+005D:  MOVLW  96
+005E:  MOVWF  15
+005F:  CALL   004
+....................          output_low(pin_b2); 
+0060:  BCF    06.2
+0061:  INCF   13,F
+0062:  GOTO   04E
+....................          } 
+....................       } 
+0063:  GOTO   020
+....................    } 
+....................  
+.................... } 
+0064:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3FF2   HS NOWDT PUT NOPROTECT
